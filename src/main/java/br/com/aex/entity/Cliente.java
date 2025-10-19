@@ -9,7 +9,7 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
-@Entity
+@Entity(name = "cliente")
 public class Cliente {
 
     @Id
@@ -20,5 +20,5 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Pedido> pedido;
-    
+
 }

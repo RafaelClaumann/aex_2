@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "pedido")
 public class Pedido {
 
     @Id
