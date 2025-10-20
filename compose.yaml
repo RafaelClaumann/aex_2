@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:15.3-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@email.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - "9090:80"
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
