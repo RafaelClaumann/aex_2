@@ -36,4 +36,5 @@ build/
 mvnw
 mvnw.cmd
 
-data/
+data/pgadmin/*
+data/postgres/*
