@@ -1,10 +1,13 @@
 package br.com.aex.adapter.output.persistence;
 
+import br.com.aex.adapter.output.persistence.entities.Cliente;
+import br.com.aex.adapter.output.persistence.exceptions.ClientNotFoundException;
 import br.com.aex.adapter.output.persistence.mapper.ClientMapper;
 import br.com.aex.domain.models.ClienteModel;
 import br.com.aex.domain.ports.output.ClientRepository;
-import br.com.aex.adapter.output.persistence.entities.Cliente;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClientRepositoryAdapter implements ClientRepository {
 
     private final ClientJpaRepository clientJpaRepository;
@@ -17,7 +20,7 @@ public class ClientRepositoryAdapter implements ClientRepository {
 
     @Override
     public ClienteModel getClientById(Long id) {
-        final Cliente foundEntity = clientJpaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+        final Cliente foundEntity = clientJpaRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
         return clientMapper.toClientModel(foundEntity);
     }
 
