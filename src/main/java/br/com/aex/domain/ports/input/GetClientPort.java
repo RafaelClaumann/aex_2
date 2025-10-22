@@ -1,4 +1,4 @@
-package br.com.aex.domain.ports;
+package br.com.aex.domain.ports.input;
 
 public interface GetClientPort {
 

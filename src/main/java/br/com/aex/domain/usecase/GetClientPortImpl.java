@@ -1,6 +1,6 @@
 package br.com.aex.domain.usecase;
 
-import br.com.aex.domain.ports.GetClientPort;
+import br.com.aex.domain.ports.input.GetClientPort;
 import org.springframework.stereotype.Service;
 
 @Service

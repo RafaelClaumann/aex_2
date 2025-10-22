@@ -1,6 +1,6 @@
 package br.com.aex.adapter.input;
 
-import br.com.aex.domain.ports.GetClientPort;
+import br.com.aex.domain.ports.input.GetClientPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
