@@ -1,6 +1,7 @@
 package br.com.aex.adapter.output.persistence;
 
 import br.com.aex.domain.ports.output.ClientRepository;
+import br.com.aex.entity.Cliente;
 
 public class ClientRepositoryAdapter implements ClientRepository {
 
@@ -11,7 +12,8 @@ public class ClientRepositoryAdapter implements ClientRepository {
     }
 
     @Override
-    public void getClientById(Long id) {
-        clientJpaRepository.findById(id).ifPresent(client -> {});
+    public Cliente getClientById(Long id) {
+        return clientJpaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
     }
+
 }
