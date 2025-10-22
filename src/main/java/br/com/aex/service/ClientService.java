@@ -2,6 +2,7 @@ package br.com.aex.service;
 
 import br.com.aex.entity.Cliente;
 import br.com.aex.repository.ClientRepository;
+import br.com.aex.service.exceptions.ClientNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class ClientService {
 
     public Cliente getClient(final Long id) {
         Optional<Cliente> cliente = clientRepository.findById(id);
-        return cliente.orElse(null);
+        return cliente.orElseThrow(() -> new ClientNotFoundException(id));
     }
 
 }
