@@ -1,4 +1,4 @@
-package br.com.aex.entity;
+package br.com.aex.adapter.output.persistence.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
