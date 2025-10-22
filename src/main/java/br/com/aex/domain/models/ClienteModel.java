@@ -1,6 +1,6 @@
 package br.com.aex.domain.models;
 
-import br.com.aex.entity.Pedido;
+import br.com.aex.adapter.output.persistence.entities.Pedido;
 
 import java.util.List;
 

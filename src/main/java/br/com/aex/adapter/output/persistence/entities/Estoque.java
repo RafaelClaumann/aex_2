@@ -1,16 +1,21 @@
-package br.com.aex.entity;
+package br.com.aex.adapter.output.persistence.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
-@Entity(name = "categoria")
-public class Categoria {
+@Entity(name = "estoque")
+public class Estoque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    
+
+    private Integer quantidade;
+
+    @OneToOne
+    private Produto produto;
+
 }

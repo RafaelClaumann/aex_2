@@ -3,7 +3,7 @@ package br.com.aex.adapter.output.persistence;
 import br.com.aex.adapter.output.persistence.mapper.ClientMapper;
 import br.com.aex.domain.models.ClienteModel;
 import br.com.aex.domain.ports.output.ClientRepository;
-import br.com.aex.entity.Cliente;
+import br.com.aex.adapter.output.persistence.entities.Cliente;
 
 public class ClientRepositoryAdapter implements ClientRepository {
 
