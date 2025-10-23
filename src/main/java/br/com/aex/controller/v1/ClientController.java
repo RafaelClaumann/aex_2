@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +29,11 @@ public class ClientController {
     public ResponseEntity<Cliente> getClient(@PathVariable final Long id) {
         Cliente client = clientService.getClient(id);
         return ResponseEntity.ok(client);
+    }
+
+    @PostMapping
+    public void saveClient(@RequestBody final ClientDtoV1 clienteDto) {
+        clientService.SaveClient(clienteDto);
     }
 
     @ExceptionHandler
