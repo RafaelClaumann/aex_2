@@ -1,6 +1,6 @@
 package br.com.aex.controller.v1.exception;
 
-import br.com.aex.service.exceptions.ResourceNotFoundException;
+import br.com.aex.service.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

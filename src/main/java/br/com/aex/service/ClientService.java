@@ -4,7 +4,7 @@ import br.com.aex.controller.v1.dto.ClientDtoV1;
 import br.com.aex.controller.v1.dto.ClientPatchDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.repository.ClientRepository;
-import br.com.aex.service.exceptions.ResourceNotFoundException;
+import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

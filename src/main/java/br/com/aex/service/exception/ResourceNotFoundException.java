@@ -1,4 +1,4 @@
-package br.com.aex.service.exceptions;
+package br.com.aex.service.exception;
 
 import lombok.Getter;
 
