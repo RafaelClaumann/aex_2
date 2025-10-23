@@ -31,13 +31,8 @@ public class ClientController {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Cliente> deleteClient(@PathVariable final Long id) {
-        boolean clientExists = clientService.existsById(id);
-        if (clientExists) {
-            clientService.deleteClient(id);
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.notFound().build();
+        clientService.deleteClient(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping
