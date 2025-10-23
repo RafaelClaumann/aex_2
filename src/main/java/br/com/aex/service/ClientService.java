@@ -23,7 +23,7 @@ public class ClientService {
         return cliente.orElseThrow(() -> new ClientNotFoundException(id));
     }
 
-    public Cliente SaveClient(final ClientDtoV1 cliente) {
+    public Cliente saveClient(final ClientDtoV1 cliente) {
         Cliente clienteEntity = Cliente.builder()
                 .nome(cliente.nome())
                 .telefone(cliente.telefone())

@@ -36,7 +36,7 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<ClientDtoV1> saveClient(@RequestBody @Valid final ClientDtoV1 clienteDto, final UriComponentsBuilder uriBuilder) {
-        Cliente clienteEntity = clientService.SaveClient(clienteDto);
+        Cliente clienteEntity = clientService.saveClient(clienteDto);
 
         var uri = uriBuilder
                 .path("/v1/client/{id}")
@@ -56,7 +56,7 @@ public class ClientController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ProblemDetail handleClientNotFound(final MethodArgumentNotValidException ex) {
+    public ProblemDetail handleRequestBodyValidation(final MethodArgumentNotValidException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST.value());
         ex.getBindingResult().getFieldErrors().forEach(error -> problemDetail.setProperty(error.getField(), error.getDefaultMessage()));
         return problemDetail;
