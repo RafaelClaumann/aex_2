@@ -1,4 +1,4 @@
-package br.com.aex.controller.v1;
+package br.com.aex.controller.v1.dto;
 
 import jakarta.validation.constraints.Size;
 
