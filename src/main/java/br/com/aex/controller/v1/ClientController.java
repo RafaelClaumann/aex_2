@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/v1/client")
 public class ClientController {
@@ -28,34 +30,31 @@ public class ClientController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Cliente> getClient(@PathVariable final Long id) {
-        Cliente client = clientService.getClient(id);
+        final Cliente client = clientService.getClient(id);
         return ResponseEntity.ok(client);
+    }
+
+    @PostMapping
+    public ResponseEntity<ClientDtoV1> saveClient(@RequestBody @Valid final ClientDtoV1 clientDto, final UriComponentsBuilder uriBuilder) {
+        final Cliente clienteEntity = clientService.saveClient(clientDto);
+        final URI uri = uriBuilder
+                .path("/v1/client/{id}")
+                .buildAndExpand(clienteEntity.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(clientDto);
+    }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<Cliente> patchClient(@PathVariable final Long id, @RequestBody @Valid final ClientPatchDtoV1 patchDto) {
+        clientService.patchClient(id, patchDto);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Cliente> deleteClient(@PathVariable final Long id) {
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<Cliente> updateClient(@PathVariable final Long id, @RequestBody @Valid final ClientPatchDtoV1 cliente) {
-        clientService.patchClient(id, cliente);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping
-    public ResponseEntity<ClientDtoV1> saveClient(@RequestBody @Valid final ClientDtoV1 clienteDto, final UriComponentsBuilder uriBuilder) {
-        Cliente clienteEntity = clientService.saveClient(clienteDto);
-
-        var uri = uriBuilder
-                .path("/v1/client/{id}")
-                .buildAndExpand(clienteEntity.getId())
-                .toUri();
-
-        return ResponseEntity
-                .created(uri)
-                .body(clienteDto);
     }
 
 }

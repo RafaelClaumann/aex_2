@@ -27,30 +27,30 @@ public class ClientService {
         ));
     }
 
-    public Cliente saveClient(final ClientDtoV1 cliente) {
+    public Cliente saveClient(final ClientDtoV1 clientDto) {
         final Cliente clienteEntity = Cliente.builder()
-                .nome(cliente.nome())
-                .telefone(cliente.telefone())
+                .nome(clientDto.nome())
+                .telefone(clientDto.telefone())
                 .pedido(List.of())
                 .build();
 
         return clientRepository.save(clienteEntity);
     }
 
-    public void deleteClient(final Long id) {
-        clientRepository.deleteById(id);
-    }
-
-    public void patchClient(final Long id, final ClientPatchDtoV1 clientDto) {
+    public void patchClient(final Long id, final ClientPatchDtoV1 patchDto) {
         final Cliente client = this.getClient(id);
 
-        if (clientDto.nome() != null)
-            client.setNome(clientDto.nome());
+        if (patchDto.nome() != null)
+            client.setNome(patchDto.nome());
 
-        if (clientDto.telefone() != null)
-            client.setTelefone(clientDto.telefone());
+        if (patchDto.telefone() != null)
+            client.setTelefone(patchDto.telefone());
 
         clientRepository.save(client);
+    }
+
+    public void deleteClient(final Long id) {
+        clientRepository.deleteById(id);
     }
 
 }
