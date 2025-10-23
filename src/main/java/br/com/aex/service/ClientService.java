@@ -3,7 +3,7 @@ package br.com.aex.service;
 import br.com.aex.controller.v1.ClientDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.repository.ClientRepository;
-import br.com.aex.service.exceptions.ClientNotFoundException;
+import br.com.aex.service.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +19,15 @@ public class ClientService {
     }
 
     public Cliente getClient(final Long id) {
-        Optional<Cliente> cliente = clientRepository.findById(id);
-        return cliente.orElseThrow(() -> new ClientNotFoundException(id));
+        final Optional<Cliente> cliente = clientRepository.findById(id);
+        return cliente.orElseThrow(() -> new ResourceNotFoundException(
+                id.toString(),
+                this.getClass().getSimpleName()
+        ));
     }
 
     public Cliente saveClient(final ClientDtoV1 cliente) {
-        Cliente clienteEntity = Cliente.builder()
+        final Cliente clienteEntity = Cliente.builder()
                 .nome(cliente.nome())
                 .telefone(cliente.telefone())
                 .pedido(List.of())
@@ -36,7 +39,7 @@ public class ClientService {
     public boolean existsById(final Long id) {
         try {
             this.getClient(id);
-        } catch (ClientNotFoundException e) {
+        } catch (ResourceNotFoundException e) {
             return false;
         }
         return true;
