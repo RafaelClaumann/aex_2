@@ -1,6 +1,7 @@
 package br.com.aex.service;
 
 import br.com.aex.controller.v1.ClientDtoV1;
+import br.com.aex.controller.v1.ClientPatchDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.repository.ClientRepository;
 import br.com.aex.service.exceptions.ResourceNotFoundException;
@@ -38,6 +39,18 @@ public class ClientService {
 
     public void deleteClient(final Long id) {
         clientRepository.deleteById(id);
+    }
+
+    public void patchClient(final Long id, final ClientPatchDtoV1 clientDto) {
+        final Cliente client = this.getClient(id);
+
+        if (clientDto.nome() != null)
+            client.setNome(clientDto.nome());
+
+        if (clientDto.telefone() != null)
+            client.setTelefone(clientDto.telefone());
+
+        clientRepository.save(client);
     }
 
 }

@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,12 @@ public class ClientController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Cliente> deleteClient(@PathVariable final Long id) {
         clientService.deleteClient(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<Cliente> updateClient(@PathVariable final Long id, @RequestBody @Valid final ClientPatchDtoV1 cliente) {
+        clientService.patchClient(id, cliente);
         return ResponseEntity.noContent().build();
     }
 
