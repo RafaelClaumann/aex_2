@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,17 @@ public class ClientController {
     public ResponseEntity<Cliente> getClient(@PathVariable final Long id) {
         Cliente client = clientService.getClient(id);
         return ResponseEntity.ok(client);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Cliente> deleteClient(@PathVariable final Long id) {
+        boolean clientExists = clientService.existsById(id);
+        if (clientExists) {
+            clientService.deleteClient(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

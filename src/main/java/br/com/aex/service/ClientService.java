@@ -33,4 +33,17 @@ public class ClientService {
         return clientRepository.save(clienteEntity);
     }
 
+    public boolean existsById(final Long id) {
+        try {
+            this.getClient(id);
+        } catch (ClientNotFoundException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public void deleteClient(final Long id) {
+        clientRepository.deleteById(id);
+    }
+
 }
