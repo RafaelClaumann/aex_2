@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/v1/client")
@@ -34,8 +35,17 @@ public class ClientController {
     }
 
     @PostMapping
-    public void saveClient(@RequestBody @Valid final ClientDtoV1 clienteDto) {
-        clientService.SaveClient(clienteDto);
+    public ResponseEntity<ClientDtoV1> saveClient(@RequestBody @Valid final ClientDtoV1 clienteDto, final UriComponentsBuilder uriBuilder) {
+        Cliente clienteEntity = clientService.SaveClient(clienteDto);
+
+        var uri = uriBuilder
+                .path("/v1/client/{id}")
+                .buildAndExpand(clienteEntity.getId())
+                .toUri();
+
+        return ResponseEntity
+                .created(uri)
+                .body(clienteDto);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

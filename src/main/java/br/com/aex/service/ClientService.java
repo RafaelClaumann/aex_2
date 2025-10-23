@@ -23,14 +23,14 @@ public class ClientService {
         return cliente.orElseThrow(() -> new ClientNotFoundException(id));
     }
 
-    public void SaveClient(final ClientDtoV1 cliente) {
+    public Cliente SaveClient(final ClientDtoV1 cliente) {
         Cliente clienteEntity = Cliente.builder()
                 .nome(cliente.nome())
                 .telefone(cliente.telefone())
                 .pedido(List.of())
                 .build();
 
-        clientRepository.save(clienteEntity);
+        return clientRepository.save(clienteEntity);
     }
 
 }
