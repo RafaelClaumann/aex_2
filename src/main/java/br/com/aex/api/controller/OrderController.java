@@ -30,11 +30,7 @@ public class OrderController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<OrderDtoV1> getOrder(@PathVariable final Long id) {
         final Pedido order = orderService.getOrder(id);
-        final OrderDtoV1 response = new OrderDtoV1(
-                order.getCliente().getId(),
-                order.getStatus(),
-                order.getValor()
-        );
+        final OrderDtoV1 response = OrderDtoV1.from(order);
         
         return ResponseEntity.ok(response);
     }
