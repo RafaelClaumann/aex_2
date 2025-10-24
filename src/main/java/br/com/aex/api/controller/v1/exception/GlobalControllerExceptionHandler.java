@@ -1,4 +1,4 @@
-package br.com.aex.controller.v1.exception;
+package br.com.aex.api.controller.v1.exception;
 
 import br.com.aex.service.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

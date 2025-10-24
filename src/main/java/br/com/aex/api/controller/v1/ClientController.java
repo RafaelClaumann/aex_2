@@ -1,7 +1,7 @@
-package br.com.aex.controller.v1;
+package br.com.aex.api.controller.v1;
 
-import br.com.aex.controller.v1.dto.ClientDtoV1;
-import br.com.aex.controller.v1.dto.ClientPatchDtoV1;
+import br.com.aex.api.controller.v1.dto.ClientDtoV1;
+import br.com.aex.api.controller.v1.dto.ClientPatchDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.service.ClientService;
 import jakarta.validation.Valid;
