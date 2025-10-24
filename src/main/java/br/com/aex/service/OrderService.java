@@ -1,6 +1,7 @@
 package br.com.aex.service;
 
 import br.com.aex.api.dto.order.OrderDtoV1;
+import br.com.aex.api.dto.order.OrderPatchDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.entity.Pedido;
 import br.com.aex.repository.OrderRepository;
@@ -42,4 +43,15 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
+    public void patchOrder(final Long id, final OrderPatchDtoV1 patchDto) {
+        Pedido order = this.getOrder(id);
+
+        if (patchDto.valor() != null)
+            order.setValor(patchDto.valor());
+
+        if (patchDto.status() != null)
+            order.setStatus(patchDto.status());
+
+        orderRepository.save(order);
+    }
 }
