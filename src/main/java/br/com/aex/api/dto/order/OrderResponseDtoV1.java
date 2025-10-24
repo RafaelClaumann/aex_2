@@ -13,7 +13,7 @@ public record OrderResponseDtoV1(
         BigDecimal valor
 ) {
 
-    public static OrderResponseDtoV1 fromEntity(Pedido order) {
+    public static OrderResponseDtoV1 from(Pedido order) {
         return new OrderResponseDtoV1(
                 order.getId(),
                 order.getCliente().getId(),

@@ -12,7 +12,7 @@ public record ClientResponseDtoV1(
 
     public static ClientResponseDtoV1 from(final Cliente client) {
         final ClientDtoV1 clientDto = new ClientDtoV1(client.getNome(), client.getTelefone());
-        final List<OrderResponseDtoV1> ordersDtoList = client.getPedido().stream().map(OrderResponseDtoV1::fromEntity).toList();
+        final List<OrderResponseDtoV1> ordersDtoList = client.getPedido().stream().map(OrderResponseDtoV1::from).toList();
 
         return new ClientResponseDtoV1(clientDto, ordersDtoList);
     }
