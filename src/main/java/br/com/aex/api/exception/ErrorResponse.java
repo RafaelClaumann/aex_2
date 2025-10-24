@@ -1,4 +1,4 @@
-package br.com.aex.api.controller.v1.exception;
+package br.com.aex.api.exception;
 
 import java.time.LocalDateTime;
 
