@@ -4,9 +4,11 @@ import br.com.aex.api.dto.order.OrderDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.entity.Pedido;
 import br.com.aex.repository.OrderRepository;
+import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -17,6 +19,11 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository, ClientService clientService) {
         this.orderRepository = orderRepository;
         this.clientService = clientService;
+    }
+
+    public Pedido getOrder(final Long id) {
+        final Optional<Pedido> order = orderRepository.findById(id);
+        return order.orElseThrow(() -> new ResourceNotFoundException(id.toString(), this.getClass().getSimpleName()));
     }
 
     public Pedido saveOrder(final OrderDtoV1 orderDto) {
