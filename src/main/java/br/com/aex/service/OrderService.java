@@ -38,4 +38,8 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public void deleteOrder(final Long id) {
+        orderRepository.deleteById(id);
+    }
+
 }
