@@ -5,6 +5,8 @@ import br.com.aex.entity.Produto;
 import br.com.aex.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,13 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<ProductDtoV1> getClient(@PathVariable final Long id) {
+        final Produto produto = productService.getProduct(id);
+        final ProductDtoV1 response = ProductDtoV1.from(produto);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
