@@ -19,7 +19,7 @@ public class CategoryService {
     public Categoria getCategory(final Long id) {
         final Optional<Categoria> product = categoryRepository.findById(id);
         return product.orElseThrow(() -> new ResourceNotFoundException(
-                id.toString(),
+                "Categoria não encontrada: " + id,
                 this.getClass().getSimpleName()
         ));
     }

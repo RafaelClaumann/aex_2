@@ -23,7 +23,7 @@ public class ProductService {
     public Produto getProduct(final Long id) {
         final Optional<Produto> product = productRepository.findById(id);
         return product.orElseThrow(() -> new ResourceNotFoundException(
-                id.toString(),
+                "Produto não encontrado: " + id,
                 this.getClass().getSimpleName()
         ));
     }
