@@ -1,0 +1,34 @@
+name: Java CI with Maven
+
+on:
+  pull_request:
+    branches:
+      - 'feat/**'
+      - 'feature/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 Corretto
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: 'maven'
+
+      - name: Validate project structure
+        run: mvn validate -B
+
+      - name: Compile source code
+        run: mvn compile -B
+
+      - name: Run unit tests
+        run: mvn test -B
+
+      - name: Package and verify
+        run: mvn clean install -B -T 4C
