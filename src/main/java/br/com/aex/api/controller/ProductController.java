@@ -5,6 +5,7 @@ import br.com.aex.entity.Produto;
 import br.com.aex.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ProductDtoV1> getClient(@PathVariable final Long id) {
+    public ResponseEntity<ProductDtoV1> getProduct(@PathVariable final Long id) {
         final Produto produto = productService.getProduct(id);
         final ProductDtoV1 response = ProductDtoV1.from(produto);
         return ResponseEntity.ok(response);
@@ -41,6 +42,12 @@ public class ProductController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(productDto);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable final Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
