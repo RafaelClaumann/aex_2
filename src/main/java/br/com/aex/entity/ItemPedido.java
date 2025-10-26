@@ -34,5 +34,4 @@ public class ItemPedido {
     @ManyToOne
     private Produto produto;
 
-
 }
