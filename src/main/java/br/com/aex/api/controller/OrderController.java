@@ -1,9 +1,11 @@
 package br.com.aex.api.controller;
 
+import br.com.aex.api.dto.complete_order.CompleteOrderDtoV1;
 import br.com.aex.api.dto.order.OrderDtoV1;
 import br.com.aex.api.dto.order.OrderPatchDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.entity.Pedido;
+import br.com.aex.service.CompleteOrderService;
 import br.com.aex.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +26,11 @@ import java.net.URI;
 public class OrderController {
 
     private final OrderService orderService;
+    private final CompleteOrderService completeOrderService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, CompleteOrderService completeOrderService) {
         this.orderService = orderService;
+        this.completeOrderService = completeOrderService;
     }
 
     @GetMapping(path = "/{id}")
@@ -46,6 +50,12 @@ public class OrderController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(orderDto);
+    }
+
+    @PostMapping(path = "/complete_order")
+    public ResponseEntity<CompleteOrderDtoV1> saveCompleteOrder(@RequestBody @Valid CompleteOrderDtoV1 completeOrderDto) {
+        final CompleteOrderDtoV1 response = completeOrderService.createCompleteOrderUsecase(completeOrderDto);
+        return ResponseEntity.ok(response);
     }
 
     @PatchMapping(path = "/{id}")
