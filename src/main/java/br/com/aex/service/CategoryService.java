@@ -16,10 +16,10 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Categoria getCategory(final Long id) {
-        final Optional<Categoria> product = categoryRepository.findById(id);
-        return product.orElseThrow(() -> new ResourceNotFoundException(
-                "Categoria não encontrada: " + id,
+    public Categoria getCategory(final String name) {
+        final Optional<Categoria> category = categoryRepository.findCategoryByNome(name);
+        return category.orElseThrow(() -> new ResourceNotFoundException(
+                "Categoria não encontrada: " + name,
                 this.getClass().getSimpleName()
         ));
     }

@@ -3,6 +3,7 @@ package br.com.aex.service;
 import br.com.aex.api.dto.product.ProductDtoV1;
 import br.com.aex.entity.Categoria;
 import br.com.aex.entity.Produto;
+import br.com.aex.model.CategoriaEnum;
 import br.com.aex.repository.ProductRepository;
 import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,8 @@ public class ProductService {
     }
 
     public Produto saveProduct(final ProductDtoV1 productDto) {
-        final Categoria category = categoryService.getCategory(productDto.idCategoria());
-
+        final CategoriaEnum categoryEnum = CategoriaEnum.from(productDto.categoria());
+        final Categoria category = categoryService.getCategory(categoryEnum.name());
         final Produto build = Produto.builder()
                 .nome(productDto.nome())
                 .descricao(productDto.descricao())

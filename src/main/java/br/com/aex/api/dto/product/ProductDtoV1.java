@@ -6,7 +6,7 @@ public record ProductDtoV1(
         String nome,
         String descricao,
         BigDecimal precoVenda,
-        Long idCategoria
+        String categoria
 ) {
 
 }
