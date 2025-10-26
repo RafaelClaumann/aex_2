@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public record ProductResponseDtoV1(
+        Long id,
         String nome,
         String descricao,
         BigDecimal precoVenda,
@@ -15,6 +16,7 @@ public record ProductResponseDtoV1(
 
     public static ProductResponseDtoV1 from(final Produto product) {
         return new ProductResponseDtoV1(
+                product.getId(),
                 product.getNome(),
                 product.getDescricao(),
                 product.getPrecoVenda(),
@@ -25,6 +27,7 @@ public record ProductResponseDtoV1(
     public static List<ProductResponseDtoV1> from(final List<Produto> products) {
         return products.stream().map(product ->
                 new ProductResponseDtoV1(
+                        product.getId(),
                         product.getNome(),
                         product.getDescricao(),
                         product.getPrecoVenda(),
