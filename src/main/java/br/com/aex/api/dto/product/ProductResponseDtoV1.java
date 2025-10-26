@@ -18,7 +18,7 @@ public record ProductResponseDtoV1(
                 product.getNome(),
                 product.getDescricao(),
                 product.getPrecoVenda(),
-                Objects.nonNull(product.getCategoria()) ? product.getCategoria().getNome() : null
+                Objects.nonNull(product.getCategoria()) ? product.getCategoria().getNome().name() : null
         );
     }
 
@@ -28,7 +28,7 @@ public record ProductResponseDtoV1(
                         product.getNome(),
                         product.getDescricao(),
                         product.getPrecoVenda(),
-                        Objects.nonNull(product.getCategoria()) ? product.getCategoria().getNome() : null
+                        Objects.nonNull(product.getCategoria()) ? product.getCategoria().getNome().name() : null
                 )
         ).toList();
     }
