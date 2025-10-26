@@ -33,7 +33,7 @@ public class CompleteOrderService {
     }
 
     @Transactional
-    public void createCompleteOrderUsecase(final CompleteOrderDtoV1 completeOrderDto) {
+    public CompleteOrderDtoV1 createCompleteOrderUsecase(final CompleteOrderDtoV1 completeOrderDto) {
         final Cliente client = clientService.getClient(completeOrderDto.clientId());
 
         final Pedido order = buildOrder(client);
@@ -44,6 +44,8 @@ public class CompleteOrderService {
         order.setValor(orderTotalPrice);
 
         itemOrderService.saveAll(itemOrderList);
+
+        return completeOrderDto;
     }
 
     private Pedido buildOrder(final Cliente client) {
