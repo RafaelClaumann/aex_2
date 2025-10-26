@@ -1,6 +1,6 @@
 package br.com.aex.entity;
 
-import br.com.aex.model.CategoriaEnum;
+import br.com.aex.model.CategoryEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,6 +18,6 @@ public class Categoria {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private CategoriaEnum nome;
+    private CategoryEnum nome;
 
 }
