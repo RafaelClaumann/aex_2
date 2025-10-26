@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CompleteOrderService {
+public class CreateOrderService {
 
     private final ProductService productService;
     private final ClientService clientService;
     private final OrderService orderService;
     private final ItemOrderService itemOrderService;
 
-    public CompleteOrderService(
+    public CreateOrderService(
             ProductService productService,
             ClientService clientService,
             OrderService orderService,
@@ -33,7 +33,7 @@ public class CompleteOrderService {
     }
 
     @Transactional
-    public CompleteOrderDtoV1 createCompleteOrderUsecase(final CompleteOrderDtoV1 completeOrderDto) {
+    public CompleteOrderDtoV1 createOrder(final CompleteOrderDtoV1 completeOrderDto) {
         final Cliente client = clientService.getClient(completeOrderDto.clientId());
 
         final Pedido order = buildOrder(client);

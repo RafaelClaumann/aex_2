@@ -5,7 +5,7 @@ import br.com.aex.api.dto.order.OrderDtoV1;
 import br.com.aex.api.dto.order.OrderPatchDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.entity.Pedido;
-import br.com.aex.service.CompleteOrderService;
+import br.com.aex.service.CreateOrderService;
 import br.com.aex.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
-    private final CompleteOrderService completeOrderService;
+    private final CreateOrderService createOrderService;
 
-    public OrderController(OrderService orderService, CompleteOrderService completeOrderService) {
+    public OrderController(OrderService orderService, CreateOrderService createOrderService) {
         this.orderService = orderService;
-        this.completeOrderService = completeOrderService;
+        this.createOrderService = createOrderService;
     }
 
     @GetMapping(path = "/{id}")
@@ -38,9 +38,9 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(path = "/complete_order")
-    public ResponseEntity<CompleteOrderDtoV1> saveCompleteOrder(@RequestBody @Valid CompleteOrderDtoV1 completeOrderDto) {
-        final CompleteOrderDtoV1 response = completeOrderService.createCompleteOrderUsecase(completeOrderDto);
+    @PostMapping(path = "/create_order")
+    public ResponseEntity<CompleteOrderDtoV1> createOrder(@RequestBody @Valid CompleteOrderDtoV1 completeOrderDto) {
+        final CompleteOrderDtoV1 response = createOrderService.createOrder(completeOrderDto);
         return ResponseEntity.ok(response);
     }
 
