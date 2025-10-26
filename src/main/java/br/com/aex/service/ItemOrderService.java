@@ -8,6 +8,7 @@ import br.com.aex.repository.ItemOrderRepository;
 import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,10 @@ public class ItemOrderService {
                 .build();
 
         return itemOrderRepository.save(itemOrder);
+    }
+
+    public List<ItemPedido> saveAll(final List<ItemPedido> itemOrders) {
+        return itemOrderRepository.saveAll(itemOrders);
     }
 
 }
