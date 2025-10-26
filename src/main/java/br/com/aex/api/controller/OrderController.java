@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/v1/order")
@@ -39,17 +36,6 @@ public class OrderController {
         final OrderDtoV1 response = OrderDtoV1.from(order);
 
         return ResponseEntity.ok(response);
-    }
-
-    @PostMapping
-    public ResponseEntity<OrderDtoV1> saveOrder(@RequestBody @Valid OrderDtoV1 orderDto, final UriComponentsBuilder uriBuilder) {
-        final Pedido orderEntity = orderService.saveOrder(orderDto);
-        final URI uri = uriBuilder
-                .path("/v1/order/{id}")
-                .buildAndExpand(orderEntity.getId())
-                .toUri();
-
-        return ResponseEntity.created(uri).body(orderDto);
     }
 
     @PostMapping(path = "/complete_order")
