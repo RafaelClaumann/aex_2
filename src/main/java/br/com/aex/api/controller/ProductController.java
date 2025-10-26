@@ -1,6 +1,7 @@
 package br.com.aex.api.controller;
 
 import br.com.aex.api.dto.product.ProductDtoV1;
+import br.com.aex.api.dto.product.ProductResponseDtoV1;
 import br.com.aex.entity.Produto;
 import br.com.aex.service.ProductService;
 import jakarta.validation.Valid;
@@ -28,28 +29,29 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getProduct() {
+    public ResponseEntity<List<ProductResponseDtoV1>> getProduct() {
         final List<Produto> products = productService.getProducts();
-        final List<ProductDtoV1> response = ProductDtoV1.from(products);
+        final List<ProductResponseDtoV1> response = ProductResponseDtoV1.from(products);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ProductDtoV1> getProduct(@PathVariable final Long id) {
+    public ResponseEntity<ProductResponseDtoV1> getProduct(@PathVariable final Long id) {
         final Produto produto = productService.getProduct(id);
-        final ProductDtoV1 response = ProductDtoV1.from(produto);
+        final ProductResponseDtoV1 response = ProductResponseDtoV1.from(produto);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<ProductDtoV1> createProduct(@RequestBody @Valid final ProductDtoV1 productDto) {
+    public ResponseEntity<ProductResponseDtoV1> createProduct(@RequestBody @Valid final ProductDtoV1 productDto) {
         final Produto produto = productService.saveProduct(productDto);
         final URI uri = UriComponentsBuilder
                 .fromPath("/v1/product/{id}")
                 .buildAndExpand(produto.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(productDto);
+        final ProductResponseDtoV1 response = ProductResponseDtoV1.from(produto);
+        return ResponseEntity.created(uri).body(response);
     }
 
     @DeleteMapping(path = "/{id}")
