@@ -40,15 +40,15 @@ public class ProductService {
 
     public Produto saveProduct(final ProductDtoV1 productDto) {
         final CategoryEnum categoryEnum = CategoryEnum.from(productDto.categoria());
-        final Categoria category = categoryService.getCategory(categoryEnum.name());
-        final Produto build = Produto.builder()
+        final Categoria category = categoryService.getCategory(categoryEnum);
+        final Produto product = Produto.builder()
                 .nome(productDto.nome())
                 .descricao(productDto.descricao())
                 .precoVenda(productDto.precoVenda())
                 .categoria(category)
                 .build();
 
-        return productRepository.save(build);
+        return productRepository.save(product);
     }
 
     public void deleteProduct(final Long id) {
