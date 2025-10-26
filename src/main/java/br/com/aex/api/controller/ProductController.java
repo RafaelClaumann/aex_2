@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
@@ -24,6 +25,13 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getProduct() {
+        final List<Produto> products = productService.getProducts();
+        final List<ProductDtoV1> response = ProductDtoV1.from(products);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{id}")

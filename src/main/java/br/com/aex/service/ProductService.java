@@ -7,6 +7,7 @@ import br.com.aex.repository.ProductRepository;
 import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,14 @@ public class ProductService {
     public ProductService(ProductRepository productRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
         this.categoryService = categoryService;
+    }
+
+    public List<Produto> getProducts() {
+        final List<Produto> products = productRepository.findAll();
+        if (products.isEmpty())
+            throw new ResourceNotFoundException("Não existem Produtos cadastrados", this.getClass().getSimpleName());
+
+        return products;
     }
 
     public Produto getProduct(final Long id) {
