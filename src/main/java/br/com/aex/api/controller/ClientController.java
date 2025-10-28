@@ -54,7 +54,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDtoV1> saveClient(@RequestBody @Valid final ClientDtoV1 clientDto, final UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ClientDtoV1> createClient(@RequestBody @Valid final ClientDtoV1 clientDto, final UriComponentsBuilder uriBuilder) {
         final Cliente clienteEntity = clientService.saveClient(clientDto);
         final URI uri = uriBuilder
                 .path("/v1/client/{id}")
