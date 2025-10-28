@@ -5,16 +5,16 @@ import br.com.aex.entity.Cliente;
 
 import java.util.List;
 
-public record ClientResponseDtoV1(
+public record ClientOrderResponseDtoV1(
         ClientDtoV1 client,
         List<OrderResponseDtoV1> orders
 ) {
 
-    public static ClientResponseDtoV1 from(final Cliente client) {
+    public static ClientOrderResponseDtoV1 from(final Cliente client) {
         final ClientDtoV1 clientDto = new ClientDtoV1(client.getNome(), client.getTelefone());
         final List<OrderResponseDtoV1> ordersDtoList = client.getPedido().stream().map(OrderResponseDtoV1::from).toList();
 
-        return new ClientResponseDtoV1(clientDto, ordersDtoList);
+        return new ClientOrderResponseDtoV1(clientDto, ordersDtoList);
     }
 
 }

@@ -2,7 +2,7 @@ package br.com.aex.api.controller;
 
 import br.com.aex.api.dto.client.ClientDtoV1;
 import br.com.aex.api.dto.client.ClientPatchDtoV1;
-import br.com.aex.api.dto.client.ClientResponseDtoV1;
+import br.com.aex.api.dto.client.ClientOrderResponseDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.service.ClientService;
 import jakarta.validation.Valid;
@@ -36,9 +36,9 @@ public class ClientController {
     }
 
     @GetMapping(path = "/{id}/orders")
-    public ResponseEntity<ClientResponseDtoV1> getClientOrders(@PathVariable final Long id) {
+    public ResponseEntity<ClientOrderResponseDtoV1> getClientOrders(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
-        final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
+        final ClientOrderResponseDtoV1 response = ClientOrderResponseDtoV1.from(client);
 
         return ResponseEntity.ok(response);
     }
