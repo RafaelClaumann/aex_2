@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -28,6 +29,13 @@ public class ClientController {
 
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @GetMapping
+    public ResponseEntity<ClientResponseDtoV1> getClient(@RequestParam final String telefone) {
+        final Cliente client = clientService.getClient(telefone);
+        final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{id}")
