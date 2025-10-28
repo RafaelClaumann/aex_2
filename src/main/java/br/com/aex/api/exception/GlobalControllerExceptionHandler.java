@@ -46,8 +46,8 @@ public class GlobalControllerExceptionHandler {
     public ResponseEntity<ErrorResponse> handleDataIntegrityViolation(final DataIntegrityViolationException ex, final HttpServletRequest request) {
         final ErrorResponse error = new ErrorResponse(
                 request.getMethod(),
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
                 request.getRequestURI(),
                 ex.getClass().getSimpleName(),
                 ex.getMessage(),
