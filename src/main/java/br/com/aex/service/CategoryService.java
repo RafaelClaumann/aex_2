@@ -1,6 +1,7 @@
 package br.com.aex.service;
 
 import br.com.aex.entity.Categoria;
+import br.com.aex.model.CategoryEnum;
 import br.com.aex.repository.CategoryRepository;
 import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Categoria getCategory(final Long id) {
-        final Optional<Categoria> product = categoryRepository.findById(id);
-        return product.orElseThrow(() -> new ResourceNotFoundException(
-                "Categoria não encontrada: " + id,
+    public Categoria getCategory(final CategoryEnum categoryEnum) {
+        final Optional<Categoria> category = categoryRepository.findCategoryByNome(categoryEnum);
+        return category.orElseThrow(() -> new ResourceNotFoundException(
+                "Categoria não encontrada: " + categoryEnum.name(),
                 this.getClass().getSimpleName()
         ));
     }
