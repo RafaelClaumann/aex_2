@@ -27,7 +27,7 @@ services:
 
   app:
     image: aex-jar:latest  # para buscar do docker-hub, use rafaelclaumann/aex-jar:latest
-    container_name: app
+    container_name: app-compose
     depends_on:
       - postgres
       - pgadmin
