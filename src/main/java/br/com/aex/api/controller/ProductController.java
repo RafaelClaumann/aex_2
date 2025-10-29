@@ -4,6 +4,10 @@ import br.com.aex.api.dto.product.ProductDtoV1;
 import br.com.aex.api.dto.product.ProductResponseDtoV1;
 import br.com.aex.entity.Produto;
 import br.com.aex.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
+@Tag(name = "Product Management", description = "Operations related to user creation, retrieval, and updates.")
 public class ProductController {
 
     private final ProductService productService;
@@ -29,13 +34,17 @@ public class ProductController {
     }
 
     @GetMapping
+    @Operation(summary = "List available products")
     public ResponseEntity<List<ProductResponseDtoV1>> getProduct() {
         final List<Produto> products = productService.getProducts();
         final List<ProductResponseDtoV1> response = ProductResponseDtoV1.from(products);
         return ResponseEntity.ok(response);
     }
 
+
     @GetMapping(path = "/{id}")
+    @Operation(summary = "Get product by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Product ID")
     public ResponseEntity<ProductResponseDtoV1> getProduct(@PathVariable final Long id) {
         final Produto produto = productService.getProduct(id);
         final ProductResponseDtoV1 response = ProductResponseDtoV1.from(produto);
@@ -43,6 +52,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @Operation(summary = "Create product")
     public ResponseEntity<ProductResponseDtoV1> createProduct(@RequestBody @Valid final ProductDtoV1 productDto) {
         final Produto produto = productService.saveProduct(productDto);
         final URI uri = UriComponentsBuilder
@@ -55,6 +65,8 @@ public class ProductController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Delete product by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Product ID")
     public ResponseEntity<Void> deleteProduct(@PathVariable final Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
