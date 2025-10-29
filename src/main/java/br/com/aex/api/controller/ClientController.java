@@ -6,6 +6,10 @@ import br.com.aex.api.dto.client.ClientPatchDtoV1;
 import br.com.aex.api.dto.client.ClientResponseDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.service.ClientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +27,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/v1/client")
+@Tag(name = "Client Management", description = "Operations related to clients")
 public class ClientController {
 
     final ClientService clientService;
@@ -32,13 +37,17 @@ public class ClientController {
     }
 
     @GetMapping
-    public ResponseEntity<ClientResponseDtoV1> getClient(@RequestParam final String telefone) {
-        final Cliente client = clientService.getClient(telefone);
+    @Operation(summary = "Get client by telephone number")
+    @Parameter(name = "telephone", in = ParameterIn.QUERY, description = "Telephone number")
+    public ResponseEntity<ClientResponseDtoV1> getClient(@RequestParam final String telephone) {
+        final Cliente client = clientService.getClient(telephone);
         final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "Get client by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<ClientResponseDtoV1> getClient(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
         final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
@@ -46,6 +55,8 @@ public class ClientController {
     }
 
     @GetMapping(path = "/{id}/orders")
+    @Operation(summary = "Get client orders by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<ClientOrderResponseDtoV1> getClientOrders(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
         final ClientOrderResponseDtoV1 response = ClientOrderResponseDtoV1.from(client);
@@ -54,6 +65,7 @@ public class ClientController {
     }
 
     @PostMapping
+    @Operation(summary = "Create client")
     public ResponseEntity<ClientDtoV1> createClient(@RequestBody @Valid final ClientDtoV1 clientDto) {
         final Cliente client = clientService.saveClient(clientDto);
         final URI uri = UriComponentsBuilder
@@ -65,12 +77,16 @@ public class ClientController {
     }
 
     @PatchMapping(path = "/{id}")
+    @Operation(summary = "Patch client by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<Cliente> patchClient(@PathVariable final Long id, @RequestBody @Valid final ClientPatchDtoV1 patchDto) {
         clientService.patchClient(id, patchDto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Delete client by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<Cliente> deleteClient(@PathVariable final Long id) {
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();
