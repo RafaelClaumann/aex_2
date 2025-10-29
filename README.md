@@ -38,7 +38,7 @@ Documentações
 
 
 
-
+# Rodando Container
 
 ### Executando container com H2 DB
 
@@ -49,15 +49,14 @@ Aqui o banco de dados h2 é iniciado em memória no start do container.
 O H2 tem um console em http://localhost:8080/h2-console
 
 ```shell
-docker run --rm aex-jar:latest
+docker run --rm --publish 8080:8080 rafaelclaumann/aex-jar:latest
 ```
-
 
 ### Executando container com Postgres
 
 Neste cenário é preciso iniciar o banco de dados PostgreSQL externamente.
 
-É preciso que exista um banco chamado `aex` no PostgreSQL.
+É preciso existir um banco chamado `aex` no PostgreSQL.
 
 Também é necessário fornecer variáveis de ambiente.
 
@@ -66,7 +65,8 @@ Também é necessário fornecer variáveis de ambiente.
 docker run --rm \
     --env SPRING_PROFILES_ACTIVE="postgres" \
     --env DATABASE_ADDRESS="your_database_address" \
-    aex-jar:latest
+    --publish 8080:8080 \
+    rafaelclaumann/aex-jar:latest
 ```
 
 Se desejar conectar este container ao banco de dados criado em `infra/compose.yaml` será necessário iniciar o container na rede `aex`.
@@ -77,8 +77,9 @@ O valor de `DATABASE_ADDRESS` é obtido em `services.postgres` do `compose.yaml`
 docker run --rm \
     --env SPRING_PROFILES_ACTIVE="postgres" \
     --env DATABASE_ADDRESS="postgres" \
+    --publish 8080:8080 \
     --network infra_aex \
-    aex-jar:latest
+    rafaelclaumann/aex-jar:latest
 ```
 
 Essas são as configurações e variáveis de ambiente do profile `postgres`.
