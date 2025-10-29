@@ -27,7 +27,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/v1/client")
-@Tag(name = "Client Management", description = "Operations related to clients")
+@Tag(name = "Client Management", description = "Operations related to Clients")
 public class ClientController {
 
     final ClientService clientService;
@@ -37,7 +37,7 @@ public class ClientController {
     }
 
     @GetMapping
-    @Operation(summary = "Get client by telephone number")
+    @Operation(summary = "Get Client by telephone number")
     @Parameter(name = "telephone", in = ParameterIn.QUERY, description = "Telephone number")
     public ResponseEntity<ClientResponseDtoV1> getClient(@RequestParam final String telephone) {
         final Cliente client = clientService.getClient(telephone);
@@ -46,7 +46,7 @@ public class ClientController {
     }
 
     @GetMapping(path = "/{id}")
-    @Operation(summary = "Get client by ID")
+    @Operation(summary = "Get Client by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<ClientResponseDtoV1> getClient(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
@@ -55,7 +55,7 @@ public class ClientController {
     }
 
     @GetMapping(path = "/{id}/orders")
-    @Operation(summary = "Get client orders by ID")
+    @Operation(summary = "Get Client orders by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<ClientOrderResponseDtoV1> getClientOrders(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
@@ -65,7 +65,7 @@ public class ClientController {
     }
 
     @PostMapping
-    @Operation(summary = "Create client")
+    @Operation(summary = "Create Client")
     public ResponseEntity<ClientDtoV1> createClient(@RequestBody @Valid final ClientDtoV1 clientDto) {
         final Cliente client = clientService.saveClient(clientDto);
         final URI uri = UriComponentsBuilder
@@ -77,7 +77,7 @@ public class ClientController {
     }
 
     @PatchMapping(path = "/{id}")
-    @Operation(summary = "Patch client by ID")
+    @Operation(summary = "Patch Client by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<Cliente> patchClient(@PathVariable final Long id, @RequestBody @Valid final ClientPatchDtoV1 patchDto) {
         clientService.patchClient(id, patchDto);
@@ -85,7 +85,7 @@ public class ClientController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @Operation(summary = "Delete client by ID")
+    @Operation(summary = "Delete Client by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Client ID")
     public ResponseEntity<Cliente> deleteClient(@PathVariable final Long id) {
         clientService.deleteClient(id);

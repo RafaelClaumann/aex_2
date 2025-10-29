@@ -24,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
-@Tag(name = "Product Management", description = "Operations related to products")
+@Tag(name = "Product Management", description = "Operations related to Products")
 public class ProductController {
 
     private final ProductService productService;
@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @GetMapping
-    @Operation(summary = "List available products")
+    @Operation(summary = "List available Products")
     public ResponseEntity<List<ProductResponseDtoV1>> getProduct() {
         final List<Produto> products = productService.getProducts();
         final List<ProductResponseDtoV1> response = ProductResponseDtoV1.from(products);
@@ -43,7 +43,7 @@ public class ProductController {
 
 
     @GetMapping(path = "/{id}")
-    @Operation(summary = "Get product by ID")
+    @Operation(summary = "Get Product by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Product ID")
     public ResponseEntity<ProductResponseDtoV1> getProduct(@PathVariable final Long id) {
         final Produto produto = productService.getProduct(id);
@@ -52,7 +52,7 @@ public class ProductController {
     }
 
     @PostMapping
-    @Operation(summary = "Create product")
+    @Operation(summary = "Create Product")
     public ResponseEntity<ProductResponseDtoV1> createProduct(@RequestBody @Valid final ProductDtoV1 productDto) {
         final Produto produto = productService.saveProduct(productDto);
         final URI uri = UriComponentsBuilder
@@ -65,7 +65,7 @@ public class ProductController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @Operation(summary = "Delete product by ID")
+    @Operation(summary = "Delete Product by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Product ID")
     public ResponseEntity<Void> deleteProduct(@PathVariable final Long id) {
         productService.deleteProduct(id);

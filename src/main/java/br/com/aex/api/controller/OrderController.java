@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/order")
-@Tag(name = "Order Management", description = "Operations related to orders")
+@Tag(name = "Order Management", description = "Operations related to Orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @GetMapping(path = "/{id}")
-    @Operation(summary = "Get order by ID")
+    @Operation(summary = "Get Order by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Order ID")
     public ResponseEntity<OrderDtoV1> getOrder(@PathVariable final Long id) {
         final Pedido order = orderService.getOrder(id);
@@ -51,7 +51,7 @@ public class OrderController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @Operation(summary = "Delete order by ID")
+    @Operation(summary = "Delete Order by ID")
     @Parameter(name = "id", in = ParameterIn.PATH, description = "Order ID")
     public ResponseEntity<Cliente> deleteOrder(@PathVariable final Long id) {
         orderService.deleteOrder(id);
