@@ -24,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
-@Tag(name = "Product Management", description = "Operations related to user creation, retrieval, and updates.")
+@Tag(name = "Product Management", description = "Operations related to products")
 public class ProductController {
 
     private final ProductService productService;
