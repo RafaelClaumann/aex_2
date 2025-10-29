@@ -31,3 +31,7 @@
   "telefone": "48996559903"
 }
 ```
+
+Documentações
+- Springdoc (springdoc-openapi-starter-webmvc-ui) ([link](https://springdoc.org/#Introduction))
+- Annotations swagger ([link](https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Annotations#quick-annotation-overview))
