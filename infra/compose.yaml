@@ -19,6 +19,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: user@email.com
       PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
       - "9090:80"
     volumes:
@@ -26,7 +27,7 @@ services:
       - ./pgadmin_server.json:/pgadmin4/servers.json
 
   app:
-    image: aex-jar:latest  # para buscar do docker-hub, use rafaelclaumann/aex-jar:latest
+    image: rafaelclaumann/aex-jar:latest  # para buscar do registry local, use -> image: /aex-jar:latest
     container_name: app-compose
     depends_on:
       - postgres
@@ -34,7 +35,7 @@ services:
     environment:
       DATABASE_ADDRESS: postgres
     ports:
-      - "8080:8080"
+      - "9595:8080"
 
 volumes:
   postgres_data:
