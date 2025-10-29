@@ -26,7 +26,7 @@ services:
       - ./pgadmin_server.json:/pgadmin4/servers.json
 
   app:
-    image: aex-jar:latest
+    image: aex-jar:latest  # para buscar do docker-hub, use rafaelclaumann/aex-jar:latest
     container_name: app
     depends_on:
       - postgres
