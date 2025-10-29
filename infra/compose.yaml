@@ -5,9 +5,11 @@ services:
     environment:
       POSTGRES_PASSWORD: pass
       POSTGRES_USER: postgres
-      POSTGRES_DB: test
+      POSTGRES_DB: aex
     ports:
       - "5432:5432"
+    networks:
+      - aex
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -22,6 +24,8 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
       - "9090:80"
+    networks:
+      - aex
     volumes:
       - pgadmin_data:/var/lib/pgadmin
       - ./pgadmin_server.json:/pgadmin4/servers.json
@@ -36,6 +40,11 @@ services:
       DATABASE_ADDRESS: postgres
     ports:
       - "9595:8080"
+    networks:
+      - aex
+
+networks:
+  aex:
 
 volumes:
   postgres_data:
