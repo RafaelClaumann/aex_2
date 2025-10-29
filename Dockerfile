@@ -1,6 +1,6 @@
 FROM amazoncorretto:21-alpine3.22-jdk
 
-COPY ../target/*.jar app.jar
+COPY target/*.jar app.jar
 
 EXPOSE 8080
 
