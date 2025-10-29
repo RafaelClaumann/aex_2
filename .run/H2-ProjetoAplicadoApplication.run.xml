@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="H2-ProjetoAplicadoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="projeto-aplicado" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.aex.ProjetoAplicadoApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
