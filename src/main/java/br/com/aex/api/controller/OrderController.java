@@ -6,6 +6,9 @@ import br.com.aex.entity.Cliente;
 import br.com.aex.entity.Pedido;
 import br.com.aex.service.CreateOrderService;
 import br.com.aex.service.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +32,8 @@ public class OrderController {
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "Get order by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Order ID")
     public ResponseEntity<OrderDtoV1> getOrder(@PathVariable final Long id) {
         final Pedido order = orderService.getOrder(id);
         final OrderDtoV1 response = OrderDtoV1.from(order);
@@ -37,12 +42,15 @@ public class OrderController {
     }
 
     @PostMapping(path = "/create_order")
+    @Operation(summary = "Create Order with Products list")
     public ResponseEntity<CompleteOrderDtoV1> createOrder(@RequestBody @Valid CompleteOrderDtoV1 completeOrderDto) {
         final CompleteOrderDtoV1 response = createOrderService.createOrder(completeOrderDto);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Delete order by ID")
+    @Parameter(name = "id", in = ParameterIn.PATH, description = "Order ID")
     public ResponseEntity<Cliente> deleteOrder(@PathVariable final Long id) {
         orderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
