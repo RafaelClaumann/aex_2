@@ -25,6 +25,17 @@ services:
       - pgadmin_data:/var/lib/pgadmin
       - ./pgadmin_server.json:/pgadmin4/servers.json
 
+  app:
+    image: aex-jar:latest
+    container_name: app
+    depends_on:
+      - postgres
+      - pgadmin
+    environment:
+      DATABASE_ADDRESS: postgres
+    ports:
+      - "8080:8080"
+
 volumes:
   postgres_data:
   pgadmin_data:
