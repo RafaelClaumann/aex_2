@@ -31,3 +31,7 @@ jobs:
 
       - name: Package and verify
         run: mvn clean install -B -T 4C
+
+      - name: Build Docker image
+        run: |
+          docker build --no-cache -t aex-jar:test .
