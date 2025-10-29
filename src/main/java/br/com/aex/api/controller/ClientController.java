@@ -1,6 +1,7 @@
 package br.com.aex.api.controller;
 
 import br.com.aex.api.dto.client.ClientDtoV1;
+import br.com.aex.api.dto.client.ClientOrderResponseDtoV1;
 import br.com.aex.api.dto.client.ClientPatchDtoV1;
 import br.com.aex.api.dto.client.ClientResponseDtoV1;
 import br.com.aex.entity.Cliente;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -29,26 +31,34 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    @GetMapping
+    public ResponseEntity<ClientResponseDtoV1> getClient(@RequestParam final String telefone) {
+        final Cliente client = clientService.getClient(telefone);
+        final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Cliente> getClient(@PathVariable final Long id) {
+    public ResponseEntity<ClientResponseDtoV1> getClient(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
-        return ResponseEntity.ok(client);
+        final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{id}/orders")
-    public ResponseEntity<ClientResponseDtoV1> getClientOrders(@PathVariable final Long id) {
+    public ResponseEntity<ClientOrderResponseDtoV1> getClientOrders(@PathVariable final Long id) {
         final Cliente client = clientService.getClient(id);
-        final ClientResponseDtoV1 response = ClientResponseDtoV1.from(client);
+        final ClientOrderResponseDtoV1 response = ClientOrderResponseDtoV1.from(client);
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<ClientDtoV1> saveClient(@RequestBody @Valid final ClientDtoV1 clientDto, final UriComponentsBuilder uriBuilder) {
-        final Cliente clienteEntity = clientService.saveClient(clientDto);
-        final URI uri = uriBuilder
-                .path("/v1/client/{id}")
-                .buildAndExpand(clienteEntity.getId())
+    public ResponseEntity<ClientDtoV1> createClient(@RequestBody @Valid final ClientDtoV1 clientDto) {
+        final Cliente client = clientService.saveClient(clientDto);
+        final URI uri = UriComponentsBuilder
+                .fromPath("/v1/client/{id}")
+                .buildAndExpand(client.getId())
                 .toUri();
 
         return ResponseEntity.created(uri).body(clientDto);
