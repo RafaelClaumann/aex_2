@@ -22,8 +22,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import static br.com.aex.api.Endpoints.V1_PRODUCT;
+
 @RestController
-@RequestMapping("/v1/product")
+@RequestMapping(V1_PRODUCT)
 @Tag(name = "Product Management", description = "Operations related to Products")
 public class ProductController {
 
@@ -56,7 +58,7 @@ public class ProductController {
     public ResponseEntity<ProductResponseDtoV1> createProduct(@RequestBody @Valid final ProductDtoV1 productDto) {
         final Produto produto = productService.saveProduct(productDto);
         final URI uri = UriComponentsBuilder
-                .fromPath("/v1/product/{id}")
+                .fromPath(V1_PRODUCT + "/{id}")
                 .buildAndExpand(produto.getId())
                 .toUri();
 

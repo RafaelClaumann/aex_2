@@ -25,8 +25,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
+import static br.com.aex.api.Endpoints.V1_CLIENT;
+
 @RestController
-@RequestMapping("/v1/client")
+@RequestMapping(V1_CLIENT)
 @Tag(name = "Client Management", description = "Operations related to Clients")
 public class ClientController {
 
@@ -69,7 +71,7 @@ public class ClientController {
     public ResponseEntity<ClientDtoV1> createClient(@RequestBody @Valid final ClientDtoV1 clientDto) {
         final Cliente client = clientService.saveClient(clientDto);
         final URI uri = UriComponentsBuilder
-                .fromPath("/v1/client/{id}")
+                .fromPath(V1_CLIENT + "/{id}")
                 .buildAndExpand(client.getId())
                 .toUri();
 

@@ -45,7 +45,11 @@ public class CreateOrderService {
 
         itemOrderService.saveAll(itemOrderList);
 
-        return completeOrderDto;
+        return new CompleteOrderDtoV1(
+                completeOrderDto.clientId(),
+                order.getId(),
+                completeOrderDto.selectedProducts()
+        );
     }
 
     private Pedido buildOrder(final Cliente client) {
