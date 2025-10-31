@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static br.com.aex.api.Endpoints.V1_ORDER;
+
 @RestController
-@RequestMapping("/v1/order")
+@RequestMapping(V1_ORDER)
 @Tag(name = "Order Management", description = "Operations related to Orders")
 public class OrderController {
 
