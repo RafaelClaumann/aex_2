@@ -27,6 +27,14 @@ public class ClientService {
         ));
     }
 
+    public Cliente getClient(final String telefone) {
+        final Optional<Cliente> cliente = clientRepository.findClienteByTelefone(telefone);
+        return cliente.orElseThrow(() -> new ResourceNotFoundException(
+                String.format("Cliente com telefone [ %s ] não encontrado", telefone),
+                this.getClass().getSimpleName()
+        ));
+    }
+
     public Cliente saveClient(final ClientDtoV1 clientDto) {
         final Cliente clienteEntity = Cliente.builder()
                 .nome(clientDto.nome())

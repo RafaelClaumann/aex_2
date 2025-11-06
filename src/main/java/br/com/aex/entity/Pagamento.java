@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 
 import java.math.BigDecimal;
 
@@ -18,8 +17,5 @@ public class Pagamento {
     private BigDecimal valorPago;
     private String formaPagamento;
     private String statusPagamento;
-
-    @OneToOne
-    private Pedido pedido;
 
 }

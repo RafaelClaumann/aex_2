@@ -1,5 +1,6 @@
 package br.com.aex.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +27,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
+
+    @Column(unique = true)
     private String telefone;
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
