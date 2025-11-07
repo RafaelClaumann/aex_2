@@ -1,12 +1,7 @@
 name: '[BACKEND] Java CI with Maven'
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'backend/**'
-      - '.github/workflows/backend-feat-ci.yaml'
+  workflow_call:
 
 jobs:
   maven-build:
