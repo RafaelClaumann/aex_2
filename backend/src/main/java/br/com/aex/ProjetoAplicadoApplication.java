@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ProjetoAplicadoApplication {
 
-    public static void main_errado(String[] args) {
+    public static void main(String[] args) {
+        // test comentários
         SpringApplication.run(ProjetoAplicadoApplication.class, args);
     }
 
