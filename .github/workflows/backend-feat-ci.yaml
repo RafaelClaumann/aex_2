@@ -10,7 +10,7 @@ on:
 
 jobs:
   maven-build:
-    if: ${{ inputs.skip != 'true' }}
+    if: ${{ inputs.skip == false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -35,7 +35,7 @@ jobs:
 
   docker-build:
     needs: maven-build
-    if: ${{ inputs.skip != 'true' }}
+    if: ${{ inputs.skip == false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
