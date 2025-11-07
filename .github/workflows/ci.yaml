@@ -1,0 +1,25 @@
+on: [pull_request]
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.diff.outputs.backend }}
+      frontend: ${{ steps.diff.outputs.frontend }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: diff
+        run: |
+          git fetch origin main
+          echo "backend=$(git diff --name-only origin/main | grep '^backend/' && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "frontend=$(git diff --name-only origin/main | grep '^frontend/' && echo true || echo false)" >> $GITHUB_OUTPUT
+
+  backend:
+    if: needs.detect.outputs.backend == 'true'
+    uses: ./.github/workflows/backend-feat-ci.yaml
+    needs: detect
+
+  frontend:
+    if: needs.detect.outputs.frontend == 'true'
+    uses: ./.github/workflows/frontend-feat-ci.yaml
+    needs: detect
