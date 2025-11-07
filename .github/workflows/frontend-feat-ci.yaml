@@ -9,14 +9,8 @@ on:
         default: false
 jobs:
   build:
-    if: ${{ inputs.skip == 'true' }}
+    if: ${{ inputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Early exit if skipping
-        if: ${{ inputs.skip }}
-        run: |
-          echo "⚪ Nenhuma mudança detectada, encerrando CI."
-          exit 0
-
       - uses: actions/checkout@v4
       - run: echo "Rodando CI de frontend..."
