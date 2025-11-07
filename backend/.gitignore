@@ -38,5 +38,3 @@ mvnw.cmd
 
 data/pgadmin/*
 data/postgres/*
-
-trigger-backend
