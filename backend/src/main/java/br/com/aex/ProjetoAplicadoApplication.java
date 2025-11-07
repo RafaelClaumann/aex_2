@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ProjetoAplicadoApplication {
 
-    public static void main(String[] args) {
+    public static void main_nao_existe(String[] args) {
         SpringApplication.run(ProjetoAplicadoApplication.class, args);
     }
 
