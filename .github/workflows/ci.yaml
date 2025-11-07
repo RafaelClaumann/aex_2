@@ -44,6 +44,7 @@ jobs:
 
   frontend:
     name: 🖥️ Frontend CI
-    if: needs.detect-changes.outputs.frontend == 'true'
     needs: detect-changes
     uses: ./.github/workflows/frontend-feat-ci.yaml
+    with:
+      skip: ${{ needs.detect-changes.outputs.frontend != 'true' }}
