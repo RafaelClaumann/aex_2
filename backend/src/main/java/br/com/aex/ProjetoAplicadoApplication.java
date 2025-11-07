@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 public class ProjetoAplicadoApplication {
 
     public static void main(String[] args) {
-        // comentario
         SpringApplication.run(ProjetoAplicadoApplication.class, args);
     }
 
