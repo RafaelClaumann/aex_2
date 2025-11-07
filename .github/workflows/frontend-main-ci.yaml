@@ -1,7 +1,9 @@
-name: '[FRONTEND] CI'
+name: '[FRONTEND] Build and Push Docker image'
 
 on:
-  workflow_call:
+  push:
+    tags:
+      - 'frontend-v*.*.*'
 
 jobs:
   build:
