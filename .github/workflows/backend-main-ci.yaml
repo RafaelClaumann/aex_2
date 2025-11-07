@@ -1,9 +1,9 @@
-name: Build and Push Docker image
+name: '[BACKEND] Build and Push Docker image'
 
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'backend-v*.*.*'
 
 jobs:
   build:
@@ -20,6 +20,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Build with Maven (no cache)
+        working-directory: ./backend
         run: mvn -B clean package -DskipTests
 
       - name: Set up Docker Buildx
@@ -38,8 +39,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./backend          # contexto agora é a pasta backend
+          file: ./backend/Dockerfile  # Dockerfile dentro de backend
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/aex-jar:latest
