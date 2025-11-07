@@ -1,0 +1,13 @@
+name: '[FRONTEND] Build and Push Docker image'
+
+on:
+  push:
+    tags:
+      - 'frontend-v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Rodando CI de frontend..."
