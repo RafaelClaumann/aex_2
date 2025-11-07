@@ -34,16 +34,18 @@ jobs:
           else
             echo "::notice::⚪ Nenhuma mudança no frontend"
             echo "frontend=false" >> $GITHUB_OUTPUT
-          fi          
+          fi
 
   backend:
     name: 🧱 Backend CI
-    if: needs.detect-changes.outputs.backend == 'true'
     needs: detect-changes
     uses: ./.github/workflows/backend-feat-ci.yaml
+    with:
+      skip: ${{ needs.detect-changes.outputs.backend != 'true' }}
 
   frontend:
     name: 🖥️ Frontend CI
-    if: needs.detect-changes.outputs.frontend == 'true'
     needs: detect-changes
     uses: ./.github/workflows/frontend-feat-ci.yaml
+    with:
+      skip: ${{ needs.detect-changes.outputs.frontend != 'true' }}
