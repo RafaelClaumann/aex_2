@@ -9,26 +9,9 @@ on:
         default: false
 
 jobs:
-  check-skip:
-    name: Verificar se deve pular CI
-    runs-on: ubuntu-latest
-    outputs:
-      should_skip: ${{ steps.check.outputs.should_skip }}
-    steps:
-      - name: Verifica variável skip
-        id: check
-        run: |
-          if [[ "${{ inputs.skip }}" == "true" ]]; then
-            echo "⚪ Nenhuma mudança detectada, pulando build."
-            echo "should_skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "🟢 Mudanças detectadas, executando build."
-            echo "should_skip=false" >> $GITHUB_OUTPUT
-          fi
-
   maven-build:
     needs: check-skip
-    if: ${{ needs.check-skip.outputs.should_skip != 'true' }}
+    if: ${{ inputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -55,7 +38,7 @@ jobs:
     needs:
       - check-skip
       - maven-build
-    if: ${{ needs.check-skip.outputs.should_skip != 'true' }}
+    if: ${{ inputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
