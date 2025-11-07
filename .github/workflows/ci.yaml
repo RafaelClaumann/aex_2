@@ -40,8 +40,12 @@ jobs:
     name: 🧱 Backend CI
     needs: detect-changes
     uses: ./.github/workflows/backend-feat-ci.yaml
+    with:
+      skip: ${{ needs.detect-changes.outputs.backend != 'true' }}
 
   frontend:
     name: 🖥️ Frontend CI
     needs: detect-changes
     uses: ./.github/workflows/frontend-feat-ci.yaml
+    with:
+      skip: ${{ needs.detect-changes.outputs.frontend != 'true' }}

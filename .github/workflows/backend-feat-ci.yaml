@@ -3,14 +3,14 @@ name: '[BACKEND] Java CI with Maven'
 on:
   workflow_call:
     inputs:
-      run_ci:
+      skip:
         required: false
         type: boolean
         default: false
 
 jobs:
   maven-build:
-    if: ${{ inputs.run_ci }}
+    if: ${{ inputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -34,10 +34,8 @@ jobs:
           path: backend/target/*.jar
 
   docker-build:
-    needs:
-      - check-skip
-      - maven-build
-    if: ${{ inputs.run_ci }}
+    needs: maven-build
+    if: ${{ inputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
