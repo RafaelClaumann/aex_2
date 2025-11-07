@@ -3,13 +3,13 @@ name: '[FRONTEND] CI'
 on:
   workflow_call:
     inputs:
-      skip:
+      run_ci:
         required: false
         type: boolean
         default: false
 jobs:
   build:
-    if: ${{ inputs.skip }}
+    if: ${{ inputs.run_ci }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -3,15 +3,14 @@ name: '[BACKEND] Java CI with Maven'
 on:
   workflow_call:
     inputs:
-      skip:
+      run_ci:
         required: false
         type: boolean
         default: false
 
 jobs:
   maven-build:
-    needs: check-skip
-    if: ${{ inputs.skip }}
+    if: ${{ inputs.run_ci }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,7 +37,7 @@ jobs:
     needs:
       - check-skip
       - maven-build
-    if: ${{ inputs.skip }}
+    if: ${{ inputs.run_ci }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
