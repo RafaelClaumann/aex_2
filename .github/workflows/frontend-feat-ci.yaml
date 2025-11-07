@@ -9,7 +9,7 @@ on:
         default: false
 jobs:
   build:
-    if: ${{ inputs.skip != 'true' }}
+    if: ${{ inputs.skip }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
