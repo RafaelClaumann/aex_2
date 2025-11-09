@@ -7,12 +7,22 @@ import { toast } from "sonner";
 interface FormData {
   nome: string;
   telefone: string;
+<<<<<<< Updated upstream
+=======
+  email: string;
+  endereco: string;
+>>>>>>> Stashed changes
 }
 
 export default function Cadastro() {
   const [formData, setFormData] = useState<FormData>({
     nome: "",
     telefone: "",
+<<<<<<< Updated upstream
+=======
+    email: "",
+    endereco: "",
+>>>>>>> Stashed changes
   });
   const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
@@ -57,6 +67,11 @@ export default function Cadastro() {
         const cliente = await response.json();
         localStorage.setItem("clienteId", cliente.id.toString());
         localStorage.setItem("clienteNome", cliente.nome);
+<<<<<<< Updated upstream
+=======
+        localStorage.setItem("clienteTelefone", cliente.telefone);
+        toast.success(`Bem-vindo de volta, ${cliente.nome}!`);
+>>>>>>> Stashed changes
         window.location.href = "/menu";
       } else {
         // Criar novo cliente
@@ -71,6 +86,11 @@ export default function Cadastro() {
             body: JSON.stringify({
               nome: formData.nome,
               telefone: formData.telefone,
+<<<<<<< Updated upstream
+=======
+              email: formData.email,
+              endereco: formData.endereco,
+>>>>>>> Stashed changes
             }),
           }
         );
@@ -157,7 +177,43 @@ export default function Cadastro() {
                   required
                 />
               </div>
+<<<<<<< Updated upstream
               
+=======
+
+              {!isLogin && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="seu@email.com"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Endereço
+                    </label>
+                    <textarea
+                      name="endereco"
+                      value={formData.endereco}
+                      onChange={handleChange}
+                      placeholder="Seu endereço completo"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      rows={3}
+                    />
+                  </div>
+                </>
+              )}
+
+>>>>>>> Stashed changes
               <Button
                 type="submit"
                 disabled={loading}
