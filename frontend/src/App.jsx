@@ -26,7 +26,7 @@ function App() {
       });
   }, []);
 
-    function incrementQuantity(id) {
+  function incrementQuantity(id) {
     const productsList = [...products];
     const product = productsList.find((product) => product.id === id);
     product.quantity = product.quantity <= 999 ? product.quantity + 1 : 0;
