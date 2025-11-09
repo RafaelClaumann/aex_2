@@ -3,7 +3,6 @@ import api from "../services/Api";
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const [selectedProducts, setSelectedProducts] = useState([]);
   const [partialValue, setPartialValue] = useState(0.0);
 
   useEffect(() => {
@@ -44,12 +43,10 @@ function Products() {
   }
 
   function handlePartialValue() {
-    const selected = products.filter((product) => product.quantity > 0);
-    const partialValue = selected.reduce((acc, product) => {
+    const selectedProducts = products.filter((product) => product.quantity > 0);
+    const partialValue = selectedProducts.reduce((acc, product) => {
       return acc + product.quantity * product.price;
     }, 0);
-
-    setSelectedProducts(selected);
     setPartialValue(partialValue);
   }
 
