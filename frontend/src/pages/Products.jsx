@@ -26,20 +26,23 @@ function Products() {
       });
   }, []);
 
-  function incrementQuantity(id) {
-    const productsList = [...products];
-    const product = productsList.find((product) => product.id === id);
-    product.quantity = product.quantity <= 999 ? product.quantity + 1 : 0;
-    setProducts(productsList);
-    console.log(`increment_quantity | name: ${product.name} | id: ${product.id} | quantity: ${product.quantity}`);
-  }
+  function handleProductQuantity(id, operation) {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) => {
+        if (product.id !== id) return product;
 
-  function decrementQuantity(id) {
-    const productsList = [...products];
-    const product = productsList.find((product) => product.id === id);
-    product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
-    setProducts(productsList);
-    console.log(`decrement_quantity | name: ${product.name} | id: ${product.id} | quantity: ${product.quantity}`);
+        let newQuantity = product.quantity;
+        if (operation === "+") {
+          newQuantity = Math.min(product.quantity + 1, 999);
+        } else if (operation === "-") {
+          newQuantity = Math.max(product.quantity - 1, 0);
+        }
+
+        console.log(`handleProductQuantity ${operation} | id: ${product.id} | name: ${product.name} | quantity: ${newQuantity}`);
+
+        return { ...product, quantity: newQuantity };
+      })
+    );
   }
 
   function handlePartialValue() {
@@ -66,14 +69,14 @@ function Products() {
                   <div>
                     <button
                       onClick={() => {
-                        incrementQuantity(product.id);
+                        handleProductQuantity(product.id, "+");
                       }}
                     >
                       +
                     </button>
                     <button
                       onClick={() => {
-                        decrementQuantity(product.id);
+                        handleProductQuantity(product.id, "-");
                       }}
                     >
                       -
