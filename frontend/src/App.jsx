@@ -26,6 +26,22 @@ function App() {
       });
   }, []);
 
+    function incrementQuantity(id) {
+    const productsList = [...products];
+    const product = productsList.find((product) => product.id === id);
+    product.quantity = product.quantity <= 999 ? product.quantity + 1 : 0;
+    setProducts(productsList);
+    console.log("increment_quantity", product.quantity);
+  }
+
+  function decrementQuantity(id) {
+    const productsList = [...products]
+    const product = productsList.find((product) => product.id === id);
+    product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
+    setProducts(productsList);
+    console.log("decrement_quantity", product.quantity);
+  }
+
   return (
     <>
       <h1>Produtos Disponíveis</h1>
@@ -38,6 +54,13 @@ function App() {
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
+                <td>
+                  <div>
+                    <button onClick={() => { incrementQuantity(product.id); }}>+</button>
+                    <button onClick={() => { decrementQuantity(product.id); }} >-</button>
+                    <p>total: 5</p>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
