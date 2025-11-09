@@ -58,7 +58,7 @@ function App() {
                   <div>
                     <button onClick={() => { incrementQuantity(product.id); }}>+</button>
                     <button onClick={() => { decrementQuantity(product.id); }} >-</button>
-                    <p>total: 5</p>
+                    <output>total: {product.quantity}</output>
                   </div>
                 </td>
               </tr>
