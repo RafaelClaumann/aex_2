@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import api from "../services/Api";
+import Modal from "../components/Modal";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [partialValue, setPartialValue] = useState(0.0);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     api
@@ -51,6 +54,7 @@ function Products() {
       return acc + product.quantity * product.price;
     }, 0);
     setPartialValue(partialValue);
+    setSelectedProducts(selectedProducts);
   }
 
   return (
@@ -89,9 +93,29 @@ function Products() {
           </tbody>
         </table>
 
-        <button onClick={() => handlePartialValue()}>Avançar</button>
-        <output>{partialValue}</output>
+        <button
+          onClick={() => {
+            setIsOpen(true);
+            handlePartialValue();
+          }}
+        >
+          Avançar
+        </button>
       </div>
+
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Modal">
+        <div>
+          <ul>
+            {selectedProducts.map((product) => (
+              <li key={product.id}>
+                {product.quantity}x - {product.name} — R$ {product.price}
+              </li>
+            ))}
+          </ul>
+
+          <output>Total parcial: R$ {partialValue}</output>
+        </div>
+      </Modal>
     </>
   );
 }
