@@ -103,13 +103,11 @@ function Products() {
         </button>
       </div>
 
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Modal">
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Resumo do pedido">
         <div>
           <ul>
             {selectedProducts.map((product) => (
-              <li key={product.id}>
-                {product.quantity}x - {product.name} — R$ {product.price}
-              </li>
+              <li key={product.id}> {product.quantity}x - {product.name} — R$ {product.price} </li>
             ))}
           </ul>
 

@@ -12,6 +12,7 @@ function Modal({ open, onClose, title, children }) {
         
         <div className="modal-body">{children}</div>
         
+        <button className="confirm-btn" onClick={onClose}>Confirmar</button>
         <button className="close-btn" onClick={onClose}>Fechar</button>
       </div>
     </div>
