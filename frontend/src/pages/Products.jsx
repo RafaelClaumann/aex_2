@@ -4,6 +4,7 @@ import api from "../services/Api";
 function Products() {
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [partialValue, setPartialValue] = useState(0.0);
 
   useEffect(() => {
     api
@@ -14,7 +15,7 @@ function Products() {
             id: product.id,
             name: product.nome,
             description: product.descricao,
-            price: product.preco_venda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }),
+            price: product.preco_venda,
             category: product.nome_categoria,
             quantity: 0,
           };
@@ -42,10 +43,14 @@ function Products() {
     console.log(`decrement_quantity | name: ${product.name} | id: ${product.id} | quantity: ${product.quantity}`);
   }
 
-  function handleConfirmar() {
+  function handlePartialValue() {
     const selected = products.filter((product) => product.quantity > 0);
+    const partialValue = selected.reduce((acc, product) => {
+      return acc + product.quantity * product.price;
+    }, 0);
+
     setSelectedProducts(selected);
-    console.log(("selecionados", selected));
+    setPartialValue(partialValue);
   }
 
   return (
@@ -58,7 +63,7 @@ function Products() {
               <tr key={product.id}>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                <td>{product.price}</td>
+                <td>{product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</td>
                 <td>{product.category}</td>
                 <td>
                   <div>
@@ -84,7 +89,8 @@ function Products() {
           </tbody>
         </table>
 
-        <button onClick={() => handleConfirmar()}>Avançar</button>
+        <button onClick={() => handlePartialValue()}>Avançar</button>
+        <output>{partialValue}</output>
       </div>
     </>
   );
