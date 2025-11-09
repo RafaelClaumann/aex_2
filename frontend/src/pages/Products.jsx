@@ -3,6 +3,7 @@ import api from "../services/Api";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   useEffect(() => {
     api
@@ -41,6 +42,12 @@ function Products() {
     console.log(`decrement_quantity | name: ${product.name} | id: ${product.id} | quantity: ${product.quantity}`);
   }
 
+  function handleConfirmar() {
+    const selected = products.filter((product) => product.quantity > 0);
+    setSelectedProducts(selected);
+    console.log(("selecionados", selected))
+  }
+
   return (
     <>
       <h1>Produtos Disponíveis</h1>
@@ -76,6 +83,8 @@ function Products() {
             ))}
           </tbody>
         </table>
+
+        <button onClick={() => handleConfirmar()}>Avançar</button>
       </div>
     </>
   );
