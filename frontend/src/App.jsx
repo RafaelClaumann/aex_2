@@ -31,7 +31,7 @@ function App() {
     const product = productsList.find((product) => product.id === id);
     product.quantity = product.quantity <= 999 ? product.quantity + 1 : 0;
     setProducts(productsList);
-    console.log("increment_quantity", product.quantity);
+    console.log(`increment_quantity | name: ${product.name} | id: ${product.id} | quantity: ${product.quantity}`);
   }
 
   function decrementQuantity(id) {
@@ -39,7 +39,7 @@ function App() {
     const product = productsList.find((product) => product.id === id);
     product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
     setProducts(productsList);
-    console.log("decrement_quantity", product.quantity);
+    console.log(`decrement_quantity | name: ${product.name} | id: ${product.id} | quantity: ${product.quantity}`);
   }
 
   return (
