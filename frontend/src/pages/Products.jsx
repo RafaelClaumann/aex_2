@@ -14,7 +14,7 @@ function Products() {
             id: product.id,
             name: product.nome,
             description: product.descricao,
-            price: product.preco_venda,
+            price: product.preco_venda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }),
             category: product.nome_categoria,
             quantity: 0,
           };
@@ -45,7 +45,7 @@ function Products() {
   function handleConfirmar() {
     const selected = products.filter((product) => product.quantity > 0);
     setSelectedProducts(selected);
-    console.log(("selecionados", selected))
+    console.log(("selecionados", selected));
   }
 
   return (
