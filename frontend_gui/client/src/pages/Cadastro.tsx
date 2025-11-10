@@ -180,13 +180,15 @@ export default function Cadastro() {
               </p>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-gray-200">
+        {/* botão sem cadastras*/}
+          {/* <div className="mt-6 pt-6 border-t border-gray-200">
               <Link href="/menu">
                 <Button variant="outline" className="w-full">
-                  Continuar sem cadastro
+                  Continuar  para fazer pedidos cadastro
                 </Button>
               </Link>
             </div>
+            */}
           </div>
         </div>
       </main>
