@@ -1,3 +1,7 @@
+export function formatCurrency(currencyString) {
+  return currencyString.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
 export function formatDateTime(dateString) {
   if (!dateString) return "-";
 
