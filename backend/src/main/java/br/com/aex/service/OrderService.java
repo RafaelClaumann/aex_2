@@ -5,6 +5,7 @@ import br.com.aex.repository.OrderRepository;
 import br.com.aex.service.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,6 +15,14 @@ public class OrderService {
 
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
+    }
+
+    public List<Pedido> getOrders() {
+        final List<Pedido> orders = orderRepository.findAll();
+        if (orders.isEmpty())
+            throw new ResourceNotFoundException("Não existem Pedidos cadastrados", this.getClass().getSimpleName());
+
+        return orders;
     }
 
     public Pedido getOrder(final Long id) {

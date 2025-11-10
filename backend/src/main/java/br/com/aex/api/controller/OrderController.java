@@ -2,6 +2,7 @@ package br.com.aex.api.controller;
 
 import br.com.aex.api.dto.complete_order.CompleteOrderDtoV1;
 import br.com.aex.api.dto.order.OrderDtoV1;
+import br.com.aex.api.dto.order.OrderResponseDtoV1;
 import br.com.aex.entity.Cliente;
 import br.com.aex.entity.Pedido;
 import br.com.aex.service.CreateOrderService;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static br.com.aex.api.Endpoints.V1_ORDER;
 
 @RestController
@@ -33,6 +36,15 @@ public class OrderController {
     public OrderController(OrderService orderService, CreateOrderService createOrderService) {
         this.orderService = orderService;
         this.createOrderService = createOrderService;
+    }
+
+    @GetMapping
+    @Operation(summary = "List all Orders")
+    public ResponseEntity<List<OrderResponseDtoV1>> getOrder() {
+        final List<Pedido> orders = orderService.getOrders();
+        final List<OrderResponseDtoV1> response = OrderResponseDtoV1.from(orders);
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{id}")

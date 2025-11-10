@@ -4,6 +4,7 @@ import br.com.aex.entity.Pedido;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record OrderResponseDtoV1(
         Long id,
@@ -23,4 +24,15 @@ public record OrderResponseDtoV1(
         );
     }
 
+    public static List<OrderResponseDtoV1> from(List<Pedido> orders) {
+        return orders.stream().map(order ->
+                new OrderResponseDtoV1(
+                        order.getId(),
+                        order.getCliente().getId(),
+                        order.getDataCriacao(),
+                        order.getStatus(),
+                        order.getValor()
+                )
+        ).toList();
+    }
 }
