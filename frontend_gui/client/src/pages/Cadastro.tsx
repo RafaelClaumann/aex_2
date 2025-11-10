@@ -128,7 +128,6 @@ export default function Cadastro() {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              {!isLogin && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Nome Completo *
@@ -143,7 +142,7 @@ export default function Cadastro() {
                     required
                   />
                 </div>
-              )}
+              
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
