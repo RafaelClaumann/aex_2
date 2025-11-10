@@ -8,8 +8,11 @@ function Orders() {
     api
       .get("/v1/order")
       .then((response) => {
-        console.log(response.data);
-        setOrders(response.data);
+        const orders = response.data.map((order) => ({ ...order, created_at: new Date(order.created_at) }));
+        const sortedOrders = orders.sort((orderA, orderB) => orderB.created_at - orderA.created_at);
+
+        console.log(`pedidos ordenados: ${JSON.stringify(sortedOrders)}`);
+        setOrders(sortedOrders);
       })
       .catch((error) => {
         console.error(error);
@@ -26,7 +29,7 @@ function Orders() {
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.client_id}</td>
-                <td>{order.created_at}</td>
+                <td>{order.created_at.toLocaleDateString("pt-BR")}</td>
                 <td>{order.status}</td>
                 <td>{order.valor}</td>
               </tr>
