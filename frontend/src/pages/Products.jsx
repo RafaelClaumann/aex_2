@@ -57,6 +57,27 @@ function Products() {
     setSelectedProducts(selectedProducts);
   }
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const produtosMapeados = selectedProducts.map((product) => ({
+      product_id: product.id,
+      quantity: product.quantity,
+    }));
+
+    try {
+      const response = await api.post("/v1/order/create_order", {
+        client_id: 1,
+        selected_products: produtosMapeados,
+      });
+
+      console.log(`produtos escolhidos: ${JSON.stringify(produtosMapeados)}`);
+      console.log(`resposta backend: ${JSON.stringify(response.data)}`);
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+    }
+  }
+
   return (
     <>
       <h1>Produtos Disponíveis</h1>
@@ -103,7 +124,7 @@ function Products() {
         </button>
       </div>
 
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Resumo do pedido">
+      <Modal open={isOpen} onConfirm={(e) => handleSubmit(e)} onClose={() => setIsOpen(false)} title="Resumo do pedido">
         <div>
           <ul>
             {selectedProducts.map((product) => (

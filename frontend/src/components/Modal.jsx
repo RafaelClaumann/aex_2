@@ -1,6 +1,6 @@
 import "./Modal.css";
 
-function Modal({ open, onClose, title, children }) {
+function Modal({ open, onClose, onConfirm, title, children }) {
   if (!open) return null;
 
   return (
@@ -12,7 +12,7 @@ function Modal({ open, onClose, title, children }) {
         
         <div className="modal-body">{children}</div>
         
-        <button className="confirm-btn" onClick={onClose}>Confirmar</button>
+        <button className="confirm-btn" onClick={onConfirm}>Confirmar</button>
         <button className="close-btn" onClick={onClose}>Fechar</button>
       </div>
     </div>
