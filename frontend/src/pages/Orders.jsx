@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/Api";
+import { formatDateTime } from "../utils/formatDateTime";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -29,7 +30,7 @@ function Orders() {
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.client_id}</td>
-                <td>{order.created_at.toLocaleDateString("pt-BR")}</td>
+                <td>{formatDateTime(order.created_at)}</td>
                 <td>{order.status}</td>
                 <td>{order.valor}</td>
               </tr>
