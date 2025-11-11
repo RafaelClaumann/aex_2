@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../services/Api";
 import Modal from "../components/Modal";
+import { formatCurrency } from "../utils/formatters";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -88,7 +89,7 @@ function Products() {
               <tr key={product.id}>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                <td>{product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</td>
+                <td>{formatCurrency(product.price)}</td>
                 <td>{product.category}</td>
                 <td>
                   <div>
