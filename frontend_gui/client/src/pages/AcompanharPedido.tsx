@@ -1,9 +1,18 @@
+<<<<<<< Updated upstream
 import { Button } from "@/components/ui/button";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import { AlertCircle, CheckCircle, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Link, useParams } from "wouter";
+=======
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Link, useParams } from "wouter";
+import { Clock, CheckCircle, AlertCircle } from "lucide-react";
+import { APP_LOGO, APP_TITLE } from "@/const";
+import { toast } from "sonner";
+>>>>>>> Stashed changes
 
 interface ItemPedido {
   id: number;
